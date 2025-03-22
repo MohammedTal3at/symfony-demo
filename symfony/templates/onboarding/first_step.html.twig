@@ -1,0 +1,73 @@
+{# templates/registration/step1.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Onboarding - Step 1{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Step 1: User Information</h3>
+                </div>
+                <div class="card-body">
+                    {% for flash_error in app.flashes('error') %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ flash_error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                    
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name) }}
+                            <div class="form-text text-danger">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            <div class="form-text text-danger">
+                                {{ form_errors(form.email) }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form_label(form.phoneNumber) }}
+                            {{ form_widget(form.phoneNumber) }}
+                            <div class="form-text text-danger">
+                                {{ form_errors(form.phoneNumber) }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">{{ form_label(form.subscriptionType) }}</label>
+                            <div class="mt-2">
+                                {% for child in form.subscriptionType %}
+                                    <div class="form-check">
+                                        {{ form_widget(child) }}
+                                        <label class="form-check-label" for="{{ child.vars.id }}">
+                                            {{ child.vars.label }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-text text-danger">
+                                {{ form_errors(form.subscriptionType) }}
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Next Step</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

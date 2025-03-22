@@ -1,0 +1,74 @@
+{# templates/onboarding/confirm_step.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirm Your Information{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">Step 4: Confirm Your Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Personal Information</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><strong>Name:</strong> {{ userData.name }}</p>
+                                    <p><strong>Email:</strong> {{ userData.email }}</p>
+                                    <p><strong>Phone Number:</strong> {{ userData.phoneNumber }}</p>
+                                    <p><strong>Subscription Type:</strong> {{ userData.subscriptionType == 'Premium' ? 'Premium' : 'Basic' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Address Information</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><strong>Address Line 1:</strong> {{ addressData.addressLine1 }}</p>
+                                    {% if addressData.addressLine2 is defined and addressData.addressLine2 %}
+                                        <p><strong>Address Line 2:</strong> {{ addressData.addressLine2 }}</p>
+                                    {% endif %}
+                                    <p><strong>City:</strong> {{ addressData.city }}</p>
+                                    <p><strong>State/Province:</strong> {{ addressData.stateProvince ?? addressData.state }}</p>
+                                    <p><strong>Postal Code:</strong> {{ addressData.postalCode }}</p>
+                                    <p><strong>Country:</strong> {{ countryName }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if userData.subscriptionType == 'Premium' and paymentData is defined and paymentData %}
+                            <div class="mb-4">
+                                <h4>Payment Information</h4>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p><strong>Credit Card:</strong> {{ obfuscatedCardNumber }}</p>
+                                        <p><strong>Expiration Date:</strong> {{ paymentData.expirationDate }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <form method="post">
+                            <div class="d-flex justify-content-between">
+                                {% if userData.subscriptionType == 'Premium' %}
+                                    <a href="{{ path('onboarding_third_step') }}" class="btn btn-secondary">Back</a>
+                                {% else %}
+                                    <a href="{{ path('onboarding_second_step') }}" class="btn btn-secondary">Back</a>
+                                {% endif %}
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{# templates/onboarding/success.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration Complete{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Registration Complete!</h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+                    </div>
+                    <h4>Thank you for registering!</h4>
+                    <p class="mb-4">Your information has been successfully saved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
